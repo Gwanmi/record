@@ -30,7 +30,7 @@ Node* SLL_CreateNode(ElementType NewData) {
       }
 ```
 ```
-/*노드 제거*/
+/*노드 소멸*/
 void SLL_DestroyNode(Node* Node){
      free(Node);
      }
@@ -97,6 +97,106 @@ void SLL_RemoveNode(Node** Head, Node* Remove){
 /*해당 노드의 뒤에 삽입*/
 void InsertNode(Node* Current, Node* NewNode){
      NewNode->NextNode = Current->NextNode;
+     Current->NextNode = NewNode;
+}
+```
+
+### 1-2 더블 링크드 리스트(Double Linked List)
+- 링크드 리스트의 단방향 탐색 기능을 개선하여 양방향 탐색이 가능한 자료구조다.
+- 링크드 리스트는 다음 노드의 주소만 갖고 있는 반면 더블 링크드 리스트는 이전 노드의 주소도 갖고 있다.(그래서 구현상 링크드 리스트와 큰 차이는 없다)
+
+- 자료형 선언
+```
+typedef struct tagNode {
+        int Data;
+        struct tagNode* PrevNode;
+        struct tagNode* NextNode;
+} Node;
+```
+- 노드 생성/소멸
+```
+Node* SLL_CreateNode(ElementType NewData){
+     Node* NewNode = (Node*)malloc(sizeof(Node));
+     
+     NewNode->Date = NewData;
+     NewNode->PrevNode = NULL;
+     NewNode->NextNode = NULL;
+     
+     return NewNode;
+}
+```
+
+-노드 소멸
+```
+void DLL_DestroyNode(Node* Node){
+     free(Node);
+}
+```
+
+-노드 추가
+```
+void DLL_AppendNode(Node** Head, Node* Node){
+     if(*Head == NULL){
+     *Head = Node;
+     }
+     
+     else{
+     Node* Tail = Node;
+     
+     while(Tail->NextNode != NULL){
+     Tail = Tail->NextNode;
+     }
+     Tail->NextNode = Node;
+     Node->PrevNode = Tail;
+     }
+}
+```
+
+-노드 탐색
+```
+Node* DLL_SearchNode(Node* Head, int Location){
+      Node* Current = Head;
+      
+      while(Current != NULL && (--Location) >= 0){
+      Current = Current->NextNode;
+      }
+      return Current;
+}
+```
+
+- 노드 삭제
+  - *삭제 노드가 가진 앞뒤 노드의 주소값 초기화가 꼭 필요한지, 언제 필요한건지 잘 모르겠다
+```
+void DLL_Remove(Node** Head, Node* Remove){
+     if(*Head == Remove){
+         *Head = Remove->NextNode;
+         if(*Head != NULL) (*Head)->PrevNode = NULL; //어차피 헤드는 이전 노드가 없는데 꼭 해야하나?
+         
+         Remove->PrevNode = NULL;
+         Remove->NextNode = NULL;
+     }
+     
+     else{
+         Remove->PrevNode->NextNode = Remove->NextNode;
+     
+         if(Remove->NextNode != NULL) Remove->NextNode->PrevNode = Remove->PrevNode;
+     
+          Remove->PrevNode = NULL;
+          Remove->NextNode = NULL;
+     }
+}
+```
+-노드 삽입
+```
+void DLL_InsertNode(Node* Current, Node* NewNode){
+     /*새로운 노드에 주소값을 대입*/
+     NewNode->NextNode = Current->NextNode;
+     NewNode->PrevNode = Current;
+     
+     /*기존 노드들의 주소값을 변경*/
+     if(Current->NextNode != NULL){
+     Current->NextNode->PrevNode = NewNode;
+     }
      Current->NextNode = NewNode;
 }
 ```
