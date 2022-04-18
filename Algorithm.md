@@ -16,7 +16,7 @@ typedef struct tagNode {
          } Node;
 Node l_Node;
 ```
--생성, 소멸
+- 생성, 소멸
   - 링크드 리스트는 전역 변수와 정적 변수가 저장되는 스태틱 메모리와 지역 변수가 저장되는 오토매틱 메모리가 아닌 자유 저장소(Free Memory)에 저장된다.
 ```
 /*노드 생성*/
@@ -56,7 +56,7 @@ void SLL_AppendNode(Node** Head, Node* NewNode){
      }
 }
 ```
--노드 탐색
+- 노드 탐색
   - *Array와 달리 리스트는 헤드부터 시작해 노드를 세어나가야만 원하는 자료에 접근할 수 있다.
 ```
 Node* SLL_SearchNode(Node* Head, int Location){
@@ -69,7 +69,7 @@ Node* SLL_SearchNode(Node* Head, int Location){
 }
 ```
 
--노드 삭제: 리스트 내에 있는 임의의 노드를 찾아 삭제함
+- 노드 삭제: 리스트 내에 있는 임의의 노드를 찾아 삭제함
 ```
 /*헤드가 삭제해야할 노드일 수도 있으므로 헤드의 주소를 넘기기 위해 이중포인터를 사용*/
 void SLL_RemoveNode(Node** Head, Node* Remove){
@@ -92,7 +92,7 @@ void SLL_RemoveNode(Node** Head, Node* Remove){
 }
 ```
 
--노드 삽입
+- 노드 삽입
 ```
 /*해당 노드의 뒤에 삽입*/
 void InsertNode(Node* Current, Node* NewNode){
@@ -126,14 +126,14 @@ Node* SLL_CreateNode(ElementType NewData){
 }
 ```
 
--노드 소멸
+- 노드 소멸
 ```
 void DLL_DestroyNode(Node* Node){
      free(Node);
 }
 ```
 
--노드 추가
+- 노드 추가
 ```
 void DLL_AppendNode(Node** Head, Node* Node){
      if(*Head == NULL){
@@ -186,7 +186,7 @@ void DLL_Remove(Node** Head, Node* Remove){
      }
 }
 ```
--노드 삽입
+- 노드 삽입
 ```
 void DLL_InsertNode(Node* Current, Node* NewNode){
      /*새로운 노드에 주소값을 대입*/
@@ -198,5 +198,53 @@ void DLL_InsertNode(Node* Current, Node* NewNode){
      Current->NextNode->PrevNode = NewNode;
      }
      Current->NextNode = NewNode;
+}
+```
+
+## 1-3 환형 링크드 리스트(Circular Linked List)
+- 테일의 다음 노드가 헤드를 가리키는 형태의 링크드 리스트로 나머지는 다른 링크드 리스트와 거의 동일하다.
+- 테일에 접근하는 비용이 거의 없어서 노드를 추가하는 함수의 성능 개선도 가능하고 뒤에서부터 노드를 찾아나가는 루틴도 구현할 수 있다.
+
+- 노드추가
+```
+void CLL_AppendNode(Node** Head, Node* NewNode){
+     /*헤드가 없으면 새로운 노드를 헤드로*/
+     if((*Head) == NULL){
+       *Head = NewNode
+       (*Head)->PrevNode = *Head
+       (*Head)->NextNode = *Head
+     }
+     
+     else{
+       Node* Tail = (*Head)->PrevNode;
+       
+       Tail->NextNode->PrevNode = NewNode;
+       Tail->NextNode = NewNode;
+       
+       NewNode->PrevNode = Tail;
+       NewNode->NextNode = (*Head);
+     }
+}
+```
+
+- 노드 삭제
+```
+void CLL_RemoveNode(Node** Head, Node* Remove){
+     if((*Head) == Remove){
+        (*Head)->PrevNode->NextNode = Remove->NextNode;
+        (*Head)->NextNode->PrevNode = Remove->PrevNode;
+        
+        *Head = Remove->NextNode;
+        
+        Remove->PrevNode = NULL;
+        Remove->NextNode = NULL;
+     }
+     else{
+         Remove->PrevNode->NextNode = Remove->NextNode;
+         Remove->NextNode->PrevNode = Remove->PrevNode;
+         
+         Remove->PrevNode = NULL;
+         Remove->NextNode = NULL;
+     }
 }
 ```
