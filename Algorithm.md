@@ -113,8 +113,10 @@ typedef struct tagNode {
         struct tagNode* NextNode;
 } Node;
 ```
-- 노드 생성/소멸
+- 노드 생성, 소멸
+
 ```
+/*노드 생성*/
 Node* SLL_CreateNode(ElementType NewData){
      Node* NewNode = (Node*)malloc(sizeof(Node));
      
@@ -126,8 +128,8 @@ Node* SLL_CreateNode(ElementType NewData){
 }
 ```
 
-- 노드 소멸
 ```
+/*노드 소멸*/ 
 void DLL_DestroyNode(Node* Node){
      free(Node);
 }
@@ -201,7 +203,7 @@ void DLL_InsertNode(Node* Current, Node* NewNode){
 }
 ```
 
-## 1-3 환형 링크드 리스트(Circular Linked List)
+### 1-3 환형 링크드 리스트(Circular Linked List)
 - 테일의 다음 노드가 헤드를 가리키는 형태의 링크드 리스트로 나머지는 다른 링크드 리스트와 거의 동일하다.
 - 테일에 접근하는 비용이 거의 없어서 노드를 추가하는 함수의 성능 개선도 가능하고 뒤에서부터 노드를 찾아나가는 루틴도 구현할 수 있다.
 
@@ -246,5 +248,63 @@ void CLL_RemoveNode(Node** Head, Node* Remove){
          Remove->PrevNode = NULL;
          Remove->NextNode = NULL;
      }
+}
+```
+## 스택
+- 가장 먼저 들어간 데이터가 가장 마지막에 나오는 First In Last Out, 가장 마지막에 들어간 데이터가 가장 먼저 나오는 Last In First Out 구조이며 데이터의 삽입과 삭제가 한쪽 끝에서만 이뤄진다.
+- 메모리, 네트워크 프로토콜도 스택으로 구성되어 있다.
+- 주기능으로 삽입(Push)와 제거(Pop)가 있다.
+- 배열과 링크드 리스트로 구현하는 방법이 있다.
+
+- 배열로 구현
+  - 동적으로 용량을 조절하기가 어렵다는 단점이 있지만 구현이 간단하다는 장점이 있다.
+
+- 자료형 선언
+```
+typedef struct tagArrayStack{
+        int Capacity;
+        int Top;
+        Node* Nodes; //C언어 특성상 포인터를 배열로 사용할 수 있기 때문에 가능한 선언이다.
+} ArrayStack;
+```
+- 스택 생성, 소멸
+```
+/*스택 생성*/
+void AS_CreateStack(ArrayStack** Stack, int Capacity){
+     /*스택을 자유저장소에 생성*/
+     (*Stack) = (ArrayStack*)malloc(sizeof(ArrayStack));
+     
+     /*입력된 Capacity만큼의 노드를 자유 저장소에 생성*/
+     (*Stack)->Nodes = (Node*)malloc(sizeof(Node)*Capacity);
+     
+     /*값 초기화*/
+     (*Stack)->Capacity = Capacity;
+     (*Stack)->Top = 0;
+}
+```
+```
+/*스택 소멸*/
+void AS_DestroyStack(ArrayStack* Stack){
+     free(Stack->Nodes); //스택 내에 있는 노드를 먼저 해제해준다.
+     free(Stack); //스택 해제
+}
+```
+
+- Push 연산
+```
+void AS_Push(ArrayStack* Stack, int Data){
+     int Position = Stack->Top;
+     Stack->Nodes[Position] = Data;
+     Stack->Top++;
+}
+```
+
+- Pop 연산
+```
+/*빼는 연산이기 떄문에 반드시 호출자에게 값을 반환한다.*/
+int AS_Pop(ArrayStack* Stack){
+    int Position = --(Stack->Top); //Top의 값은 실제 배열 내의 최상위 값보다 1이 크기 때문에 위치로 사용할때 유의할 것
+    
+    return Stack->Nodes[Position].Data;
 }
 ```
