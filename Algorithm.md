@@ -250,16 +250,22 @@ void CLL_RemoveNode(Node** Head, Node* Remove){
      }
 }
 ```
-## 스택
+## 2. 스택
 - 가장 먼저 들어간 데이터가 가장 마지막에 나오는 First In Last Out, 가장 마지막에 들어간 데이터가 가장 먼저 나오는 Last In First Out 구조이며 데이터의 삽입과 삭제가 한쪽 끝에서만 이뤄진다.
 - 메모리, 네트워크 프로토콜도 스택으로 구성되어 있다.
 - 주기능으로 삽입(Push)와 제거(Pop)가 있다.
 - 배열과 링크드 리스트로 구현하는 방법이 있다.
 
-- 배열로 구현
-  - 동적으로 용량을 조절하기가 어렵다는 단점이 있지만 구현이 간단하다는 장점이 있다.
+### 2-1 배열로 구현
+- 동적으로 용량을 조절하기가 어렵다는 단점이 있지만 구현이 간단하다는 장점이 있다.
 
 - 자료형 선언
+```
+typedef struct tagNode{
+        int Data;
+} Node;
+```
+
 ```
 typedef struct tagArrayStack{
         int Capacity;
@@ -308,3 +314,16 @@ int AS_Pop(ArrayStack* Stack){
     return Stack->Nodes[Position].Data;
 }
 ```
+
+### 2-2 링크드 리스트로 구현
+-스택과 달리 용량에 제한이 없다.
+-배열과 다르게 인덱스로 노드에 접근할 수 없기 때문에 자신의 위에 있는 노드 위치에 대한 포인터가 있어야한다.
+
+- 자료형 선언
+```
+typedef struct tagNode{
+        char* Data;
+        struct tagNode* NextNode;
+} Node;
+```
+
