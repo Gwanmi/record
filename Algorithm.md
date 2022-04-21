@@ -327,3 +327,29 @@ typedef struct tagNode{
 } Node;
 ```
 
+- 스택 생성, 소멸
+```
+/*스택노드 생성*/
+Node* LLS_CreateNode(char* NewData){
+      /*자유저장소에 노드 할당*/
+      Node* NewNode = (Node*)malloc(sizeof(Node));
+      
+      /*문자열을 자유 저장소에 할당*/
+      NewNode->Data = (char*)malloc(strlen(NewData)+1);
+      
+      /*자유 저장소에 문자열 복사*/
+      strcpy(NewNode->Data, NewData);
+      
+      NewNode->NextNode = NULL;
+      
+      return NewNode;
+}
+```
+
+```
+/*스택 노드 소멸*/
+void LLS_DestroyNode(Node* Node){
+     free(Node->Data); //데이터를 먼저 해제
+     free(Node); //노드를 해제
+}
+```
