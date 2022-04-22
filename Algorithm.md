@@ -261,12 +261,14 @@ void CLL_RemoveNode(Node** Head, Node* Remove){
 
 - 자료형 선언
 ```
+/*노드 선언*/
 typedef struct tagNode{
         int Data;
 } Node;
 ```
 
 ```
+/*스택 선언*/
 typedef struct tagArrayStack{
         int Capacity;
         int Top;
@@ -321,15 +323,45 @@ int AS_Pop(ArrayStack* Stack){
 
 - 자료형 선언
 ```
+/* 선언*/
 typedef struct tagNode{
         char* Data;
         struct tagNode* NextNode;
 } Node;
 ```
 
+```
+/*스택 선언*/
+typedef struct tagLinkedListStack{
+        Node* List;
+        Node* Top;
+} LinkedListStack;
+```
+
 - 스택 생성, 소멸
 ```
-/*스택노드 생성*/
+/*스택 생성*/
+void LLS_CreateStack(LinkedListStack** Stack){
+     (*Stack) = (LinkedListStack*)malloc(sizeof(LinkedListStack));
+     (*Stack)->List = NULL;
+     (*Stack)->Top = NULL;
+}
+```
+
+```
+/*스택 소멸*/
+void LLS_DestroyStack(LinkedListStack* Stack){
+     /*스택이 빌 때까지 반복*/
+     while(!LLS_IsEmpty(Stack)){
+          Node* Popped = LLS_Pop(Stack); //노드를 스택에서 제거
+          LLS_DestroyNode(Popped); //메모리 해제
+     }
+     free(Stack); //
+}
+```
+
+```
+/*노드 생성*/
 Node* LLS_CreateNode(char* NewData){
       /*자유저장소에 노드 할당*/
       Node* NewNode = (Node*)malloc(sizeof(Node));
@@ -347,7 +379,7 @@ Node* LLS_CreateNode(char* NewData){
 ```
 
 ```
-/*스택 노드 소멸*/
+/*노드 소멸*/
 void LLS_DestroyNode(Node* Node){
      free(Node->Data); //데이터를 먼저 해제
      free(Node); //노드를 해제
