@@ -385,3 +385,23 @@ void LLS_DestroyNode(Node* Node){
      free(Node); //노드를 해제
 }
 ```
+
+```
+/*Push 연산*/
+void LLS_Push(LinkedListStack* Stack, Node* NewNode){
+     /*헤드일 경우*/
+     if(Stack->List == NULL){
+         Stack->List = NewNode;
+     }
+     else{
+     /*최상위 노드를 찾아서 연결*/
+     Node* OldTop = Stack->List;
+     while(OldTop->NextNode != NULL){
+         OldTop = OldTop->NextNode;
+     }
+     OldTop->NextNode = NewNode;
+     }
+     
+     Stack->Top = NewNode;
+}
+```
