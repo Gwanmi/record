@@ -405,3 +405,30 @@ void LLS_Push(LinkedListStack* Stack, Node* NewNode){
      Stack->Top = NewNode;
 }
 ```
+
+```
+/*Pop 연산*/
+Node* LLS_Pop(LinkedListStack* Stack){
+      /*Pop 하려는 Top 노드를 복사*/
+      Node* TopNode = Stack->Top;
+      
+      /*헤드라면 바로 초기화*/
+      if(Stack->Top == Stack->List){
+         Stack->List == NULL;
+         Stack->Top == NULL;
+      }
+      
+      else{
+         Node* CurrentTop = Stack->List;
+         
+         /*기존 Top 이전 노드가 나올때까지 반복문 수행 후 Top을 교체*/
+         while(CurrentTop != NULL && CurrentTop->NextNode != Stack->Top){
+                  CurrentTop = Current->NextNode;
+         }
+         Stack->Top = CurrentTop;
+         CurrentTop->NextNode = NULL;
+      }
+      
+      return TopNode;
+}
+```
