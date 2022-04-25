@@ -318,22 +318,22 @@ int AS_Pop(ArrayStack* Stack){
 ```
 
 ### 2-2 링크드 리스트로 구현
--스택과 달리 용량에 제한이 없다.
--배열과 다르게 인덱스로 노드에 접근할 수 없기 때문에 자신의 위에 있는 노드 위치에 대한 포인터가 있어야한다.
+- 스택과 달리 용량에 제한이 없다.
+- 배열과 다르게 인덱스로 노드에 접근할 수 없기 때문에 자신의 위에 있는 노드 위치에 대한 포인터가 있어야한다.
 
 - 자료형 선언
 ```
 /* 선언*/
 typedef struct tagNode{
         char* Data;
-        struct tagNode* NextNode;
+        struct tagNode* NextNode; //자신의 위에 쌓일 노드의 주소
 } Node;
 ```
 
 ```
 /*스택 선언*/
 typedef struct tagLinkedListStack{
-        Node* List;
+        Node* List; //용량 제한이 없기 때문에 Capacity는 필요 없지만 헤드부터 접근 할 주소는 필요
         Node* Top;
 } LinkedListStack;
 ```
@@ -432,3 +432,6 @@ Node* LLS_Pop(LinkedListStack* Stack){
       return TopNode;
 }
 ```
+
+### 2-3 사칙 연산 계산기
+- 수식의 중위 표기법과 후위 표기법
