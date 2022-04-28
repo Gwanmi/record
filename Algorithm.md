@@ -445,12 +445,39 @@ Node* LLS_Pop(LinkedListStack* Stack){
 ### 3-1 순환 큐
 - 개념과 구현이 다른 자료구조에 비해 비교적 까다롭다..
 - 배열의 시작과 끝을 잇는 개념이지만 실제로 그런 기능은 없기 때문에 논리적인 구현을 해야한다.
-- 가득 찼을 경우와 비어 있는 상태를 구분 하기 위해 후단의 값은 실제 후단보다 1을 더한 값을 가진다.
+- 공백과 포화 상태를 구분 하기 위해 후단의 값은 실제 후단보다 1을 더한 값을 가진다.
    - 같은 곳을 가리키면 비어 있고 후단이 전단보다 1 작은 값을 가지면 가득 찬 것.
 
 - 자료형 선언
 ```
+/*노드 선언*/
 typedef struct tagNode {
         int Data;
 } Node;
+```
+
+```
+/*순환 큐 선언*/
+typedef struct tagCircularQueue{
+        int Capacity; //용량 -> 공백 상태와 포화 상태를 구분하기 위해 더미 노드가 하나 더 있기 때문에 실제 용량보다 하나 적다.
+        int Front;    //전단의 위치
+        int Rear;     //후단의 위치 -> Capacity와 마찬가지로 공백/포화상태 구분을 위해 실제 후단보다 1 큰 값을 갖는다.
+        Node* Nodes;
+} CircularQueue;
+```
+
+
+- 순환 큐 생성
+```
+void CQ_CreateQueue(CircularQueue** Queue, int Capacity){
+     /*큐를 생성*/
+     (*Queue) = (Queue*)malloc(sizeof(CircularQueue));
+     
+     /*Capacity+1 만큼의 노드를 생성*/
+     (*Queue)->Nodes = (Node*)malloc(sizeof(Node)*Capacity+1);
+     
+     (*Queue)->Capacity = NULL;
+     (*Queue)->Front = 0;
+     (*Queue)->Rear = 0;
+}
 ```
