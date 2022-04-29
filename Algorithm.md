@@ -467,8 +467,9 @@ typedef struct tagCircularQueue{
 ```
 
 
-- 순환 큐 생성
+- 순환 큐 생성, 소멸
 ```
+/*큐 생성*/
 void CQ_CreateQueue(CircularQueue** Queue, int Capacity){
      /*큐를 생성*/
      (*Queue) = (Queue*)malloc(sizeof(CircularQueue));
@@ -479,5 +480,34 @@ void CQ_CreateQueue(CircularQueue** Queue, int Capacity){
      (*Queue)->Capacity = NULL;
      (*Queue)->Front = 0;
      (*Queue)->Rear = 0;
+}
+```
+
+```
+/*큐 소멸*/
+void CQ_DestroyQueue(CircularQueue* Queue){
+     free(Queue->Node); //노드 먼저 해제
+     free(Queue);       //큐를 해제
+}
+```
+
+-삽입(Enqueue) 연산
+
+```
+void CQ__Enqueue(CircularQueue* Queue, int Data){
+     int Position = 0;
+     
+     /*Rear가 용량과 같다면 끝에 도달했다는 의미이므로 0으로 옮겨준다*/
+     if(Queue->Rear == Queue->Capacity){
+         Position = Queue->Rear;
+         Queue->Rear = 0;
+     }
+     
+     /*Rear를 옮겨주고 값을 넣을 해당 위치 데이터를 넣을 인덱스로 사용*/
+     else{
+         Position = Queue->Rear++;
+     }
+     
+     Queue->Nodes[Position].Data = Data;
 }
 ```
