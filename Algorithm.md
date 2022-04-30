@@ -491,23 +491,82 @@ void CQ_DestroyQueue(CircularQueue* Queue){
 }
 ```
 
--삽입(Enqueue) 연산
+- 공백 확인, 포화 확인
+
+```
+/*공백 확인*/
+int CQ_IsEmpty(Circular* Queue){
+    return (Queue->Front) == (Queue->Rear); //전단과 후단이 동일한 인덱스면 비어있다는 뜻
+}
+```
+
+```
+/*포화 확인*/
+int CQ_IsFULL(Circular* Queue){
+
+    /*Front가 Rear보다 작을 경우*/
+    if((Queue->Front) < (Queue->Rear)){
+       return ((Queue->Rear) - (Queue->Front)) == Queue->Capacity;
+    }
+    
+    /*Rear가 Front보다 작을 경우*/
+    else return (Queue->Rear + 1) == Queue->Front;
+}
+```
+
+- 삽입(Enqueue) 연산
 
 ```
 void CQ__Enqueue(CircularQueue* Queue, int Data){
      int Position = 0;
      
-     /*Rear가 용량과 같다면 끝에 도달했다는 의미이므로 0으로 옮겨준다*/
-     if(Queue->Rear == Queue->Capacity){
-         Position = Queue->Rear;
-         Queue->Rear = 0;
+     //가득 차지 않았을 경우
+     if(!CQ_IsFull(Queue)){
+          /*Rear가 용량과 같다면 끝에 도달했다는 의미이므로 0으로 옮겨준다*/
+          if(Queue->Rear == Queue->Capacity){
+             Position = Queue->Rear;
+             Queue->Rear = 0;
+           }
+          
+          /*Rear를 옮겨주고 값을 넣을 해당 위치 데이터를 넣을 인덱스로 사용*/
+          else{
+               Position = Queue->Rear++;
+          }
+     
+     /*가득 찼을 경우 안내 문구를 출력하고 종료*/
+     else{
+         printf("큐가 가득 찼습니다.\n");
+         return;
      }
      
-     /*Rear를 옮겨주고 값을 넣을 해당 위치 데이터를 넣을 인덱스로 사용*/
-     else{
-         Position = Queue->Rear++;
      }
      
      Queue->Nodes[Position].Data = Data;
+}
+```
+
+- 제거(Dequeue) 연산
+
+```
+int CQ_Dequeue(CircularQueue* Queue){
+    int Position = Queue->Front;
+    
+    /*큐가 비어있지 않다면*/
+    if(!CQ_IsEmpty(Queue)){
+       /*전단이 배열의 끝이라면*/
+       if(Queue->Front == Queue->Capacity){
+         Queue->Front = 0; //전단을 배열의 앞으로 초기화
+       }
+       else{
+        Queue->Front++;
+       }
+       return Queue->Nodes[Position].Data;
+    }
+    
+    /*큐가 비어있다면*/
+    else{
+         printf("큐가 비어있습니다.\n");
+         return 0;
+    }
 }
 ```
