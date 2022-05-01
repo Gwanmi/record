@@ -570,3 +570,25 @@ int CQ_Dequeue(CircularQueue* Queue){
     }
 }
 ```
+
+### 3-2 링크드 큐
+- 순환 큐와 다르게 구현이 쉽고 포화 상태인지 확인할 필요가 없으며 용량에 제한이 없다.
+- 하지만 성능은 순환 큐가 더 빠르다.
+
+- 자료형 선언
+```
+/*노드 선언*/
+typedef struct tagNode{
+         int Data;
+         struct tagNode* NextNode;
+} Node;
+```
+
+```
+/*링크드 큐 선언*/
+typedef struct tagLinkedQueue{
+         Node* Front;
+         Node* Rear;
+         int Count;
+} LinkedQueue;
+```
