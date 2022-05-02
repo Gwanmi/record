@@ -251,7 +251,7 @@ void CLL_RemoveNode(Node** Head, Node* Remove){
 }
 ```
 ## 2. 스택
-- 가장 먼저 들어간 데이터가 가장 마지막에 나오는 First In Last Out, 가장 마지막에 들어간 데이터가 가장 먼저 나오는 Last In First Out 구조이며 데이터의 삽입과 삭제가 한쪽 끝에서만 이뤄진다.
+- 먼저 들어간 데이터가 마지막에 나오는 First In Last Out, 마지막에 들어간 데이터가 먼저 나오는 Last In First Out 구조이며 데이터의 삽입과 삭제가 한쪽 끝에서만 이뤄진다.
 - 메모리, 네트워크 프로토콜도 스택으로 구성되어 있다.
 - 주기능으로 삽입(Push)와 제거(Pop)가 있다.
 - 배열과 링크드 리스트로 구현하는 방법이 있다.
@@ -589,6 +589,68 @@ typedef struct tagNode{
 typedef struct tagLinkedQueue{
          Node* Front;
          Node* Rear;
-         int Count;
+         int Count; //노드의 숫자
 } LinkedQueue;
+```
+
+- 링크드 큐 생성, 소멸
+```
+/*생성*/
+void LQ_CreateQueue(LinkedQueue** Queue){
+     (*Queue) = (LinkedQueue)malloc(sizeof(LinkedQueue));
+     (*Queue)->Front = NULL;
+     (*Queue)->Rear = NULL;
+     (*Queue)->Count = 0;
+}
+```
+
+```
+/*소멸*/
+void LQ_DestroyQueue(LinkedQueue* Queue){
+     /*모든 노드를 먼저 해제 후 큐를 해제*/
+     while(!LQ_IsEmpty(Queue)){
+         Node* Popped = LQ_Dequeue(&Queue);
+         LQ_DestroyNode(Popped);
+     }
+     free(Queue);
+}
+```
+
+- 삽입(Enqueue) 연산
+```
+void LQ_Enqueue(LinkedQueue* Queue, Node* NewNode){
+     /*헤드 노드가 없다면*/
+     if(Queue->Front == NULL){
+         Queue->Front = NewNode;
+         Queue->Rear  = NewNode;
+         Queue->Count++;
+     }
+     else{
+         Queue->Rear->NextNode = NewNode; //후단에 노드를 연결
+         Queue->Rear = NewNode; //후단 갱신
+         Queue->Count++;
+     }
+}
+```
+
+- 제거(Dequeue) 연산
+```
+Node* LQ_Dequeue(LinkedQueue* Queue){
+      /*제거 할 최상위 노드*/
+      Node* Front = Queue->Front;
+      
+      /*최상위 노드 제거 이후 아무 것도 없다면*/
+      if(Queue->Front->NextNode == NULL){
+         Queue->Front = NULL;
+         Queue->Rear  = NULL;
+      }
+      
+      else{
+         Queue->Front = Queue->Front->NextNode;
+      }
+      
+      Queue->Count--;
+      
+      return Front;
+}
 ```
