@@ -672,3 +672,37 @@ Node* LQ_Dequeue(LinkedQueue* Queue){
 - 노드의 표현 방법으로는 2가지가 있다.
   - N-링크(N_Link) 표현법: 노드의 차수가 N개일 때 노드는 N개의 링크를 가지고 있고 이 링크는 각각 자식 노드를 가리키도록 구성된다. 쓸만해 보이지만 차수가 노드마다 달라지는 트리에서는 적용하기 어려운 단점이 있다.
   - 왼쪽 자식-오른쪽 형제(Left Child-Right Sibling) 표현법: 위의 문제를 해결한 표현법으로 이름 그대로 왼쪽에는 자식, 오른쪽에는 형제에 대한 포인터를 갖고 있는 노드의 구조다. 한 노드의 자식 노드를 구하려면 왼쪽 자식의 포인터를 따라서 오른쪽 형제의 포인터를 얻어나가면 모두 얻어낼 수 있다.
+
+
+### 4-1 기본 트리
+- 왼쪽 자식-오른쪽 형제(LCRS) 표현법 사용
+
+- 자료형 선언
+```
+typedef struct tagLCRSNode{
+        struct tagLCRSNode* LeftChild;
+        struct tagLCRSNode* RightSibling;
+        
+        int Data;
+} LCRSNode;
+```
+
+- 노드 생성, 소멸
+```
+/*노드 생성*/
+LCRSNode* LCRS_CreateNode(int NewData){
+          LCRSNode* NewNode = (LCRSNode*)malloc(sizeof(LCRSNode));
+          NewNode->LeftChild = NULL;
+          NewNode->RightSibling = NULL;
+          NewNode->Data = NewData;
+          
+          return NewNode;
+}
+```
+
+```
+/*노드 소멸*/
+void LCRS_DestroyNode(LCRS* Node){
+     free(Node);
+}
+```
