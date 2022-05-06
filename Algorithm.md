@@ -706,3 +706,20 @@ void LCRS_DestroyNode(LCRS* Node){
      free(Node);
 }
 ```
+
+- 자식 노드 연결
+```
+void LCRS_AddChildNode(LCRSNode* Parent, LCRSNode* Child){
+     if(Parent->LeftChild == NULL){
+        Parent->LeftChild = Child; //자식 노드가 없다면 바로 붙인다
+     }
+     /*자식 노드가 있다면 NULL을 찾아서 붙인다*/
+     else{
+         LCRSNode* TempNode = Parent->LeftChild;
+         while(TempNode->RightSibling != NULL)
+               TempNode = TempNode->RightSibling;
+               
+         TempNode->RightSibling = Child;
+     }
+}
+```
