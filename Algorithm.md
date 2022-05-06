@@ -723,3 +723,39 @@ void LCRS_AddChildNode(LCRSNode* Parent, LCRSNode* Child){
      }
 }
 ```
+
+- 트리 출력
+  - 깊이에 따라 들여쓰기를 해서 노드를 출력하면 트리를 표현할 수 있다.
+```
+void LCRS_PrintTree(LCRSNode* Node, int Depth){
+     int i = 0;
+     
+     /*깊이만큼 들여쓰기*/
+     for(i = 0 ; i<Depth ; i++)
+         printf(" ");
+     
+     /*데이터 출력*/
+     printf("%c\n", Node->Data);
+     
+     /*자식 노드가 있다면 출력*/
+     if(Node->LeftChild != NULL)
+        LCRS_PrintTree(Node->LeftChild, Depth+1);
+     
+     /*형제가 있다면 출력*/
+     if(Node->RightSibling != NULL)
+        LCRS_PrintTree(Node->RightSibling, Depth);
+}
+```
+### 4-2 이진 트리(Binary Tree)
+- 모든 노드가 최대 2개의 자식을 가질 수 있는 트리
+- 데이터를 담는 용도로는 적합하지 않으며 컴파일러나 검색 등에 사용되는 특수 자료구조다.
+- 대표적으로 수식을 트리 형태로 표현하여 계산하게 하는 수식 이진 트리(Expression Binary Tree), 아주 빠른 데이터 검색을 가능하게 하는 이진 탐색 트리(Binary Search Tree)가 있다.
+- 이진 트리의 종류
+  - 포화 이진 트리(Full Binary Tree): 잎 노드를 제외한 모든 노드가 자식 노드를 둘씩 갖고 있는 트리
+  - 완전 이진 트리(Complete Binary Tree): 잎 노드들이 왼쪽부터 모두 채워진 트리(일부가 비었어도 잎 노드 **사이**가 빠지지 않았다면 완전 이진 트리)
+  - 높이 균형 트리(Height Balanced Tree): 뿌리 노드를 기준으로 왼쪽 하위 트리와 오른쪽 하위 트리의 높이가 1이상 차이나지 않는 이진 트리
+  - 완전 높이 균형 트리(Complete Height Balanced Tree): 뿌리 노드를 기준으로 왼쪽 하위 트리와 오른쪽 하위 트리의 높이가 같은 이진 트리
+- 이진 트리의 순회에는 3가지가 있다.
+  - 전위 순회(Preorder Traversal):
+  - 중위 순회(Inorder Traversal):
+  - 후위 순회(Postorder Traversal):
