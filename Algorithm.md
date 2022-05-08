@@ -756,6 +756,6 @@ void LCRS_PrintTree(LCRSNode* Node, int Depth){
   - 높이 균형 트리(Height Balanced Tree): 뿌리 노드를 기준으로 왼쪽 하위 트리와 오른쪽 하위 트리의 높이가 1이상 차이나지 않는 이진 트리
   - 완전 높이 균형 트리(Complete Height Balanced Tree): 뿌리 노드를 기준으로 왼쪽 하위 트리와 오른쪽 하위 트리의 높이가 같은 이진 트리
 - 이진 트리의 순회에는 3가지가 있다.
-  - 전위 순회(Preorder Traversal):
-  - 중위 순회(Inorder Traversal):
-  - 후위 순회(Postorder Traversal):
+  - 전위 순회(Preorder Traversal): (1)뿌리 노드부터 방문 (2)왼쪽 하위 트리 방문 (3) 오른쪽 하위 트리 방문. 이진 트리를 중첩된 괄호로 표현할 수 있다.
+  - 중위 순회(Inorder Traversal): (1)왼쪽 하위 트리부터 방문 (2)뿌리를 방문 (3)오른쪽 하위 트리 방문. 대표적으로 수식 트리(Expression Tree)가 있다.
+  - 후위 순회(Postorder Traversal): (1)왼쪽 하위 트리부터 방문 (2)오른쪽 하위 트리 방문 (3) 뿌리를 방문. 중위 순회로 중위 표기식이 나오는 노드에 후위 순회를 적용하면 후위 표기식이 나온다.
