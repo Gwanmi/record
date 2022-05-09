@@ -759,3 +759,38 @@ void LCRS_PrintTree(LCRSNode* Node, int Depth){
   - 전위 순회(Preorder Traversal): (1)뿌리 노드부터 방문 (2)왼쪽 하위 트리 방문 (3) 오른쪽 하위 트리 방문. 이진 트리를 중첩된 괄호로 표현할 수 있다.
   - 중위 순회(Inorder Traversal): (1)왼쪽 하위 트리부터 방문 (2)뿌리를 방문 (3)오른쪽 하위 트리 방문. 대표적으로 수식 트리(Expression Tree)가 있다.
   - 후위 순회(Postorder Traversal): (1)왼쪽 하위 트리부터 방문 (2)오른쪽 하위 트리 방문 (3) 뿌리를 방문. 중위 순회로 중위 표기식이 나오는 노드에 후위 순회를 적용하면 후위 표기식이 나온다.
+
+- 자료형 선언
+```
+typedef struct tagSBTNode{
+        struct tagSBTNode* Left;
+        struct tagSBTNode* Right;
+        char Data;
+} SBTNode;
+```
+
+- 노드 생성, 소멸
+```
+/*노드 생성*/
+SBTNode* SBT_CreateNode(char NewData){
+         SBTNode* NewNode = (SBTNode*)malloc(sizeof(SBTNode));
+         NewNode->Left  = NULL;
+         NewNode->Right = NULL;
+         NewNode->Data = NewData;
+         
+         return NewNode;
+}
+```
+
+```
+/*노드 소멸*/
+void SBT_DestroyNode(SBTNode* Node){
+     free(Node);
+}
+```
+
+- 전위 순회를 이용한 트리 출력
+
+- 중위 순회를 이용한 트리 출력
+
+- 후위 순회를 이용한 트리 출력
