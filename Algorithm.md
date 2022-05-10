@@ -433,9 +433,6 @@ Node* LLS_Pop(LinkedListStack* Stack){
 }
 ```
 
-### 2-3 사칙 연산 계산기
-- 수식의 중위 표기법과 후위 표기법
-
 ## 3. 큐
 - 먼저 들어가고 먼저 나오는 First In First Out 구조이며 우리말로 대기행렬이라고도 한다.
 - 큐의 가장 앞요소를 전단(Front), 마지막 요소를 후단(Rear)이라고 한다.
