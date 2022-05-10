@@ -790,7 +790,72 @@ void SBT_DestroyNode(SBTNode* Node){
 ```
 
 - 전위 순회를 이용한 트리 출력
+```
+void SBT_PreorderPrintTree(SBTNode* Node){
+     if(Node==NULL) return;
+     
+     /*루트 노드 출력*/
+     printf(" %c", Node->Data);
+     
+     /*왼쪽 하위 트리 출력*/
+     SBT_PreorderPrintTree(Node->Left);
+     
+     /*오른쪽 하위 트리 출력*/
+     SBT_PreorderPrintTree(Node->Right);
+}
+```
 
 - 중위 순회를 이용한 트리 출력
-
+```
+void SBT_InorderPrintTree(SBTNode* Node){
+     if(Node == NULL) return;
+     
+     /*왼쪽 하위 트리 출력*/
+     SBT_InorderPrintTree(Node->Left);
+     
+     /*루트 노드 출력*/
+     printf(" %c", Node->Data);
+     
+     /*오른쪽 하위 트리 출력*/
+     SBT_InorderPrintTree(Node->Right);
+}
+```
 - 후위 순회를 이용한 트리 출력
+```
+void SBT_PostorderPrintTree(SBTNode* Node){
+     if(Node == NULL) return;
+     
+     /*왼쪽 하위 트리 출력*/
+     SBT_PostorderPrintTree(Node->Left);
+     
+     /*오른쪽 하위 트리 출력*/
+     SBT_PostorderPrintTree(Node->Right);
+     
+     /*루트 노트 출력*/
+     printf(" %c", Node->Data);
+}
+```
+
+- 후위 순회를 응용한 트리 소멸 함수
+  - 트리를 생성할 때의 순서는 상관 없지만 소멸할 때는 반드시 잎 노드부터 해제해야 한다.
+  - 잎 노드부터 방문하여 루트까지 거슬러 올라가며 방문하는 후위 순회를 이용하면 이진 트리를 문제 없이 소멸시킬 수 있다.
+```
+/*트리 소멸 함수*/
+void ET_DestroyTree(SBTNode* Node){
+     if(Node == NULL) return;
+     
+     /*왼쪽 하위 트리 소멸*/
+     ET_DestroyTree(Node->Left);
+     
+     /*오른쪽 하위 트리 소멸*/
+     ET_DestroyTree(Node->Right);
+     
+     ET_DestroyNode(Node);
+}
+```
+```
+/*노드 소멸 함수*/
+void ET_DestroyNode(SBTNode* Node){
+     free(Node);
+}
+```
