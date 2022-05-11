@@ -856,3 +856,34 @@ void ET_DestroyNode(SBTNode* Node){
      free(Node);
 }
 ```
+# 알고리즘
+## 5. 정렬
+### 5-1 버블 정렬(Bubble Sort)
+- 데이터를 정렬하는 과정이 수면을 올라오는 거품의 모습과 비슷해서 붙여진 이름
+- 집합 내의 이웃 요소들끼리의 교환을 통해 정렬을 수행
+- 비교 연산이 많아 비효율적이기 때문에 실제로 사용하기에는 조금 무리가 있다.
+- 하지만 구현이 간단해서 버그가 생길 가능성이 적기 때문에 쓰는 경우도 있다.
+
+```
+/*버블 정렬 구현*/
+void BubbleSort(int DataSet[], int Length){
+     int i = 0;
+     int j = 0;
+     int temp = 0;
+     
+     /*길이보다 1회 적게 루프를 돈다*/
+     for(i=0;i<Length-1;i++){
+     
+       /*정렬을 할때마다 한 번씩 줄어든다*/
+       for(j=0;j<Length-(i+1);j++){
+         
+         /*값을 비교해서 바꾼다*/
+         if(DataSet[j]>DataSet[j+1]){
+           temp = DataSet[j+1];
+           DataSet[j+1] = DataSet[j];
+           DataSet[j] = temp;
+         }
+       }
+     }   
+}
+```
