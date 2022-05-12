@@ -913,7 +913,7 @@ void InsertionSort(int DataSet[], int Length){
      /*요소를 삽입할 공간을 찾는다*/
      for(j=0;j<i;j++){
        if(DataSet[j] > value){
-         memmove(&DataSet[j+1], &DataSet[j], sizeof(DataSet[0]) * (i-j));
+         memmove(&DataSet[j+1], &DataSet[j], sizeof(DataSet[0]) * (i-j)); //메모리의 내용을 이동시키는 함수. 순환문으로 대체 가능하다
          DataSet[j] = value;
          break;
        }
