@@ -937,6 +937,15 @@ void Swap(int* A, int* B){
   *A = *B;
   *B = Temp;
 }
+
+void QuickSort(int DataSet[], int Left, int Right){
+  if(Left<Right){
+    int Index = Partition(DataSet, Left, Right);
+    
+    QuickSort(DataSet, Left, Index-1);
+    QuickSort(DataSet, Index+1, Right);
+  }
+}
 ```
 
 ---끝
