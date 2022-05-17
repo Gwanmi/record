@@ -939,9 +939,10 @@ void Swap(int* A, int* B){
   *B = Temp;
 }
 
+/*인덱스를 받아 정렬하는 함수*/
 int Partition(int DataSet[], int Left, int Right){
   int First = Left;
-  int Pivot = DataSet[First];
+  int Pivot = DataSet[First]; //피벗은 배열의 가장 첫 번째 값으로 지정
   
   ++Left;
   
@@ -966,10 +967,18 @@ void QuickSort(int DataSet[], int Left, int Right){
   if(Left<Right){
     int Index = Partition(DataSet, Left, Right);
     
+    /*재귀 호출*/
     QuickSort(DataSet, Left, Index-1);
     QuickSort(DataSet, Index+1, Right);
   }
 }
 ```
+## 6. 탐색
+### 6-1 순차 탐색(Sequential Search)
+- 데이터 집합의 처음부터 끝까지 차례대로 모든 요소를 비교해서 데이터를 찾는 탐색 알고리즘
+- 한쪽 방향으로만 탐색을 수행한다고 해서 선형 탐색(Linear Search)이라고 부르기도 한다.
+- 처음부터 모든 요소를 검사하기 때문에 효율이 나쁘다.
+- 하지만 정렬되어 있지 않은 데이터 집합 속에서 원하는 데이터를 찾을 수 있는 유일한 방법이며 구현이 간단해 버그가 생길 가능성이 적기 때문에 높은 성능이 필요치 않거나 데이터 집합의 크기가 작은 곳에 자주 사용된다.
+- 배열이나 링크드 리스트일 때 모두 사용 가능한 알고리즘이다.
 
 ---끝
