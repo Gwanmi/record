@@ -981,4 +981,37 @@ void QuickSort(int DataSet[], int Left, int Right){
 - 하지만 정렬되어 있지 않은 데이터 집합 속에서 원하는 데이터를 찾을 수 있는 유일한 방법이며 구현이 간단해 버그가 생길 가능성이 적기 때문에 높은 성능이 필요치 않거나 데이터 집합의 크기가 작은 곳에 자주 사용된다.
 - 배열이나 링크드 리스트일 때 모두 사용 가능한 알고리즘이다.
 
+```
+/*링크드 리스트를 이용한 순차 탐색*/
+Node* SLL_SeqeuntialSearch(Node* Head, int Target){
+  Node* Current = Head;
+  Node* Match = NULL;
+  
+  /*노드를 순회하며 찾는 값을 가진 노드를 탐색해 반환*/
+  while(Current != NULL){
+    if(Current->Data == Target){
+      Match = Current;
+      break;
+    }
+    else
+      Current = Current->NextNode;
+  }
+  
+  return Match;
+}
+```
+
+### 6-2 자기 구성 순차 탐색(Self-Organizing Sequential Search)
+- 자주 사용하는 항목을 데이터 집합의 앞쪽에 배치하여 순차 탐색의 효율을 올리는 방법
+- 자주 사용 되는 항목을 어떻게 선별하는가는 3가지 방법이 있다.
+#### 6-2.a 전진 이동법(Move To Front)
+- 한 번 탐색된 항목을 데이터 집합의 가장 앞에 위치시키는 방법
+- '최근 문서' 기능과 동일한 원리로 작동한다.
+- 특정한 항목들이 집중적으로 탐색 대상이 되는 것은 흔한 일이 아니기 때문에 모든 경우에 적합한 것은 아니다.
+- 한 번 탐색된 항목이 곧 이어서 또 다시 검색될 가능성이 높은 데이터 집합에서만 사용해야 한다.
+
+#### 6-2.b 전위법(Transpose)
+
+#### 6-2.c 빈도 계수법(Frequency Count)
+
 ---끝
