@@ -1023,16 +1023,16 @@ Node* SLL_MoveToFront(Node** Head, int Target){
       
       if(Previous != NULL){
         /*자신의 앞 노드와 다음 노드를 연결*/
-        Previous->NextNode = Current->NextNode;
+        Previous->NextNode = Current->NextNode; //찾은 노드의 다음 노드를 이전 노드와 연결
         
-        /*자신을 리스트의 가장 */
-        Current->NextNode = (*Head);
-        (*Head) = Current;
+        /*자신을 리스트의 가장 앞으로 이동/
+        Current->NextNode = (*Head); //찾은 노드를 헤드의 앞으로 이동
+        (*Head) = Current; //헤드를 찾은 노드로 설정
       }
       break;
     }
     else{
-      Previous = Current;
+      Previous = Current; //이전 노드를 저장
       Current = Current->NextNode;
     }
   }
@@ -1041,6 +1041,38 @@ Node* SLL_MoveToFront(Node** Head, int Target){
 ```
 
 #### 6-2 b. 전위법(Transpose)
+- 탐색된 항목을 바로 이전 항목과 교환한다는 것 말고는 기본적으로 전진 이동법과 같은 알고리즘
+- 전진 이동법과 다르게 '자주' 탐색된 항목을 점진적으로 앞으로 옮긴다.
+
+```
+Node* SLL_Transpose(Node** Head, int Target){
+  Node* Current = (*Head);
+  Node* PPrevious = NULL;
+  Node* Previous = NULL;
+  Node* Match = NULL;
+  
+  while(Current != NULL){
+    if(Current->Data == Target){
+      Match = Current;
+      if(Previous != NULL){
+        if(PPrevious != NULL) PPrevious->NextNode = Current;
+        else (*Head) = Current;
+          
+        Previous->NextNode = Current->NextNode;
+        
+        Current->NextNode = Previous;
+        }
+        break;
+    }
+    else{
+      if(Previous != NULL) PPrevious = Previous;
+      Previous = Current;
+      Current = Current->NextNode;
+    }
+  }
+  return Match;
+}
+```
 
 #### 6-2 c. 빈도 계수법(Frequency Count)
 
