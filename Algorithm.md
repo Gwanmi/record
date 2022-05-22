@@ -1089,20 +1089,27 @@ Node* SLL_Transpose(Node** Head, int Target){
 - 뛰어난 성능에 비해 구현이 굉장히 간단한 편이다.
 ```
 ElementType BinarySearch(ElementType DataSet[], int Size, ElementType Target){
-  int Left, Right Mid;
+  int Left, Right, Mid;
   
   Left = 0;
-  Right = Size-1;
+  Right = Size - 1;
   
+  /*찾을때까지 반복*/
   while(Left <= Right){
+    /*미드를 배열의 중앙값으로 설정*/
     Mid = (Left + Right)/2;
     
+    /*데이터 일치시 반환*/
     if(Target == DataSet[Mid])
       return DataSet[Mid];
+    
+    /*오른쪽에 있다면 Left 값을 재설정*/
     else if(Tatget > DataSet[Mid])
       Left = Mid + 1;
+    
+    /*왼쪽에 있다면 Right 값을 재설정*/
     else
-      Right = Mind - 1;
+      Right = Mid - 1;
   }
   return NULL;
 }
