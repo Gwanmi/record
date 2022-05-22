@@ -1079,5 +1079,33 @@ Node* SLL_Transpose(Node** Head, int Target){
 - 계수 결과를 저장하는 별도의 공간을 유지해야 하고 계수 결과에 따라 데이터 집합을 재배치해야 하는 등 비용이 더 많이 소모된다.
 
 ### 6-4 이진 탐색(Binary Search)
+- 정렬된 데이터 집합에서 사용할 수 있는 고속 탐색 알고리즘
+- 이진 탐색이라는 이름이 붙은 이유는 탐색 범위를 1/2씩 줄여나가는 방식이라 그런 것
+- 수행 과정
+  - 1. 데이터 집합의 중앙에 있는 요소를 선택
+  - 2. 중앙 요소의 값과 찾고자 하는 목표 값을 비교
+  - 3. 목표 값이 중앙 요소의 값보다 작다면 중앙을 기준으로 데이터 집합의 왼편에 대해 새로 검색을 수행하고 크다면 오른편에 대해 새로 검색을 수행한다.
+  - 4. 찾을때까지 a~c를 반복한다.
+- 뛰어난 성능에 비해 구현이 굉장히 간단한 편이다.
+```
+ElementType BinarySearch(ElementType DataSet[], int Size, ElementType Target){
+  int Left, Right Mid;
+  
+  Left = 0;
+  Right = Size-1;
+  
+  while(Left <= Right){
+    Mid = (Left + Right)/2;
+    
+    if(Target == DataSet[Mid])
+      return DataSet[Mid];
+    else if(Tatget > DataSet[Mid])
+      Left = Mid + 1;
+    else
+      Right = Mind - 1;
+  }
+  return NULL;
+}
+```
 
 ---끝
