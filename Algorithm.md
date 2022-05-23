@@ -1052,22 +1052,29 @@ Node* SLL_Transpose(Node** Head, int Target){
   Node* Match = NULL;
   
   while(Current != NULL){
+    /*해당 노드를 찾았을 경우*/
     if(Current->Data == Target){
       Match = Current;
+      /*헤드 노드가 찾는 노드일 경우를 위한 if문*/
       if(Previous != NULL){
-        if(PPrevious != NULL) PPrevious->NextNode = Current;
-        else (*Head) = Current;
+        if(PPrevious != NULL)
+          PPrevious->NextNode = Current; //전전노드의 다음 노드를 현재 노드로 가리킴
+        /*2번째 노드가 찾는 노드일 경우*/
+        else
+          (*Head) = Current; //찾는 노드를 헤드로 변경
           
-        Previous->NextNode = Current->NextNode;
+        Previous->NextNode = Current->NextNode; //전노드가 가리키는 노드를 찾는 노드의 다음 노드로 변경
         
-        Current->NextNode = Previous;
+        Current->NextNode = Previous; //찾는 노드의 다음 노드를 전노드로 변경
         }
-        break;
+        break; //수행할 경우 탈출. 헤드면 노드만 찾고 바로 탈출한다
     }
+    /*찾지 못했을 경우*/
     else{
-      if(Previous != NULL) PPrevious = Previous;
-      Previous = Current;
-      Current = Current->NextNode;
+      if(Previous != NULL)
+        PPrevious = Previous; //이전 노드를 더 앞으로
+      Previous = Current; //현재 노드를 이전 노드로
+      Current = Current->NextNode; //다음 노드를 현재 노드로
     }
   }
   return Match;
@@ -1114,5 +1121,12 @@ ElementType BinarySearch(ElementType DataSet[], int Size, ElementType Target){
   return NULL;
 }
 ```
+
+### 6-5 이진 탐색 트리(Binary Search Tree)
+- 이진 탐색을 위한 이진 트리다.
+- 이진 탐색은 데이터 집합이 배열인 경우에만 사용할 수 있기에 해당 사항이 없다.
+- 동적으로 크기가 달라지는 데이터 집합인 링크드 리스트로 이루어진 이진 트리는 한 번에 데이터의 중앙 요소에 접근할 수 없기에 이진 탐색이 불가능하다.
+- 이진 탐색 트리가 다른 이진 트리와 다른 점은 '왼쪽 자식 노드는 나보다 작고, 오른쪽 자식 노드는 나보다 크다.'라는 규칙을 갖고 있다는 것이다.
+
 
 ---끝
