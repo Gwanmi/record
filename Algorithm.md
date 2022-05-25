@@ -1127,6 +1127,37 @@ ElementType BinarySearch(ElementType DataSet[], int Size, ElementType Target){
 - 이진 탐색은 데이터 집합이 배열인 경우에만 사용할 수 있기에 해당 사항이 없다.
 - 동적으로 크기가 달라지는 데이터 집합인 링크드 리스트로 이루어진 이진 트리는 한 번에 데이터의 중앙 요소에 접근할 수 없기에 이진 탐색이 불가능하다.
 - 이진 탐색 트리가 다른 이진 트리와 다른 점은 '왼쪽 자식 노드는 나보다 작고, 오른쪽 자식 노드는 나보다 크다.'라는 규칙을 갖고 있다는 것이다.
+```
+/*이진 탐색 트리에서 이진 탐색*/
+BSTNode* BST_SearchNode(BSTNode* Tree, ElementType Target){
+  if(Tree == NULL) return NULL;
+  
+  if(Tree->Data < Target) //작다면 왼쪽으로
+    return BST_SearchNode(Tree->Left, Target);
+  else if(Tree->Data > Target) //크다면 오른쪽으로
+    return BST_SearchNode(Tree->Right, Target);
+  else
+    return Tree;
+}
+```
 
-
+```
+/*이진 탐색 트리에서 노드 삽입*/
+void BST_InsertNode(BSTNode** Tree, BSTNode *Child){
+  /*새 노드가 현재 노드보다 큰 경우*/
+  if((*Tree)->Data < Child->Data){
+    if((*Tree)->Right == NULL)
+      (*Tree)->Right = Child;
+    else
+      BST_InsertNode(&(*Tree)->Right), Child);
+  }
+  /*새 노드가 현재 노드보다 작은 경우*/
+  else if((*Tree)->Data > Child->Data){
+    if((*Tree)->Left == NULL)
+      (*Tree)->Left = Child;
+    else
+      BST_InsertNode(&(*Tree)->Left, Child);
+  }
+}
+```
 ---끝
