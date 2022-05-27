@@ -1167,4 +1167,7 @@ void BST_InsertNode(BSTNode** Tree, BSTNode *Child){
 ```
 /*이진 탐색 트리에서 노드 삭제*/
 ```
+
+### 6-6 레드 블랙 트리(Red Black Tree)
+- 
 ---끝
