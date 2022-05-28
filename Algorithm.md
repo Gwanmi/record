@@ -1169,5 +1169,6 @@ void BST_InsertNode(BSTNode** Tree, BSTNode *Child){
 ```
 
 ### 6-6 레드 블랙 트리(Red Black Tree)
-- 
+- 자가 균형 이진 탐색 트리(Self-Balancing Binary Search Tree)
+- 너무 길어서 공부한 뒤 모아서 한 번에 정리하기로 한다..
 ---끝
