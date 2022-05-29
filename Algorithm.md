@@ -1166,6 +1166,40 @@ void BST_InsertNode(BSTNode** Tree, BSTNode *Child){
 - 두 번째로 한쪽 자식 노드만 갖고 있는 경우는 삭제되는 노드의 자식을 삭제되는 노드의 부모에게 연결 시켜준다.
 ```
 /*이진 탐색 트리에서 노드 삭제*/
+BSTNode* BST_RemoveNode(BSTNode* Tree, BSTNode* Parent, ElementType Target){
+  BSTNode* Removed = NULL;
+  
+  if(Tree == NULL) return NULL;
+  
+  if(Tree->Data > Target)
+    Removed = BST_RemoveNode(Tree->Left, Tree, Target);
+  else if(Tree->Data < Target)
+    Removed = BST_RemoveNode(Tree->Right, Tree, Target);
+  else{
+    Removed = Tree;
+    
+    if(Tree->Left == NULL && Tree->Right == NULL){
+      if(Parent->Left == Tree) Parent->Left = NULL;
+      else Parent->Right = NULL;
+    }
+    else{
+      if(Tree->Left != NULL && Tree->Right != NULL){
+        BSTNode* MinNode = BST_SearchMinNode(Tree->Right);
+        Removed = BST_RemoveNode(Tree, NULL, MinNode->Data);
+        Tree->Data = MinNode->Data;
+      }
+      else{
+        BSTNode* Temp = NULLl
+        if(Tree->Left != NULL) Temp = Tree->Left;
+        else Temp = Tree->Right;
+        
+        if(Parent->Left == Tree) Parent->Left = Temp;
+        else Parent->Right = Temp;
+      }
+    }
+  }
+  return Removed;
+}
 ```
 
 ### 6-6 레드 블랙 트리(Red Black Tree)
