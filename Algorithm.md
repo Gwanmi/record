@@ -1169,25 +1169,32 @@ void BST_InsertNode(BSTNode** Tree, BSTNode *Child){
 BSTNode* BST_RemoveNode(BSTNode* Tree, BSTNode* Parent, ElementType Target){
   BSTNode* Removed = NULL;
   
-  if(Tree == NULL) return NULL;
+  if(Tree == NULL) return NULL; //트리가 비었다면 바로 종료
   
+  /*찾는 노드보다 더 크다면 왼쪽으로*/
   if(Tree->Data > Target)
     Removed = BST_RemoveNode(Tree->Left, Tree, Target);
+  /*찾는 노드보다 더 작다면 오른쪽으로*/
   else if(Tree->Data < Target)
     Removed = BST_RemoveNode(Tree->Right, Tree, Target);
+  /*찾았을 경우*/
   else{
     Removed = Tree;
     
+    /*찾은 노드가 자식이 없는 경우*/
     if(Tree->Left == NULL && Tree->Right == NULL){
-      if(Parent->Left == Tree) Parent->Left = NULL;
-      else Parent->Right = NULL;
+      if(Parent->Left == Tree) Parent->Left = NULL; //부모의 왼쪽 노드일 경우 초기화
+      else Parent->Right = NULL; //부모의 오른쪽일 경우 초기화
     }
+    /*자식이 있는 경우*/
     else{
+      /*양쪽 다 있을 경우*/
       if(Tree->Left != NULL && Tree->Right != NULL){
         BSTNode* MinNode = BST_SearchMinNode(Tree->Right);
         Removed = BST_RemoveNode(Tree, NULL, MinNode->Data);
         Tree->Data = MinNode->Data;
       }
+      /*한쪽만 있을 경우*/
       else{
         BSTNode* Temp = NULLl
         if(Tree->Left != NULL) Temp = Tree->Left;
