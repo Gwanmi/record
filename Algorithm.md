@@ -1191,7 +1191,7 @@ BSTNode* BST_RemoveNode(BSTNode* Tree, BSTNode* Parent, ElementType Target){
       /*양쪽 다 있을 경우*/
       if(Tree->Left != NULL && Tree->Right != NULL){
         BSTNode* MinNode = BST_SearchMinNode(Tree->Right);
-        Removed = BST_RemoveNode(Tree, NULL, MinNode->Data);
+        Removed = BST_RemoveNode(Tree, NULL, MinNode->Data); //MinNode에 대해 BST_RemoveNode() 함수를 호출하는 이유는 이 노드에 대해서도 제거 후의 뒤처리가 필요하기 때문
         Tree->Data = MinNode->Data;
       }
       /*한쪽만 있을 경우*/
@@ -1210,7 +1210,8 @@ BSTNode* BST_RemoveNode(BSTNode* Tree, BSTNode* Parent, ElementType Target){
 ```
 
 ### 6-6 레드 블랙 트리(Red Black Tree)
-- 자가 균형 이진 탐색 트리(Self-Balancing Binary Search Tree)
+- 자가 균형 이진 탐색 트리(Self-Balancing Binary Search Tree)라고도 부른다.
+- 노드를 빨간색 또는 검은색으로 표시하기 때문에 색깔을 위한 필드를 따로 필요로 한다. 삽입과 삭제 연산을 위해 부모 노드를 기리키는 포인터도 필요하다.
 - 너무 길어서 공부한 뒤 모아서 한 번에 정리하기로 한다..
 
 ## 7. 우선순위 큐와 힙
