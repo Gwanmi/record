@@ -1220,6 +1220,7 @@ BSTNode* BST_RemoveNode(BSTNode* Tree, BSTNode* Parent, ElementType Target){
  - 루트 노드에서 모든 잎 노드 사이에 있는 검은색 노드의 수는 모두 동일하다.
 - NIL 노드는 아무 데이터도 갖고 있지 않지만 색깔만 검은색인 더미 노드다. 굳이 사용하는 이유는 '모든 잎 노드는 검은색'이라는 규칙은 확실하게 지킬 수 있기 때문이다.
 - 레드 블랙 트리는 이진 탐색 트리이기 때문에 이진 탐색을 그대로 사용하면 된다. 하지만 삽입과 삭제에서 규칙이 무너지기 때문에 삽입과 삭제가 구현이 핵심이 된다.
+- 
 
 ## 7. 우선순위 큐와 힙
 ### 7-1 우선순위 큐
@@ -1254,4 +1255,6 @@ BSTNode* BST_RemoveNode(BSTNode* Tree, BSTNode* Parent, ElementType Target){
 ```
 
 ```
+## 8. 해시 테이블(Hash Table)
+- 입력 받은 데이터를 다른 모습의 데이터로 바꾸는 작업
 ---끝
