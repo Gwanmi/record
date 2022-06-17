@@ -1294,6 +1294,18 @@ int Hash(char* Key, int KeyLength, int TableSize){
 }
 ```
 - 자릿수 접기는 한 가지 문제가 있는데 테이블의 크기에 비해 문자열 키의 최대 길이가 짧다면 너무 많은 수의 주소가 활용되지 않는다는 것이다.
+- 이와 같은 문제를 사용되지 않는 비트의 숫자를 계산해 그만큼 왼쪽으로 밀어올린 다음 아스키 코드 번호를 더하는 것으로 해결한다.
+- 예시 코드는 해시 테이블 크기가 14비트로 이루어져 있고 해시 함수의 최대 주소는 11비트만 활용하는 것으로 가정한다.
+```
+int Hash(char* Key, int KeyLength, int TableSize){
+  int i = 0;
+  int HashValue = 0;
+  
+  for(i = 0 ; i < KeyLength ; i++)
+    HashValue = (HashValue << 3) + Key[i];
+  
+  return HashValue % TableSize;
+```
 
 #### 8-3 해시 함수의 충돌 해결
 - 해시 함수는 아무리 정교하게 설계되었다고 해도 모든 입력 값에 대해 고유한 해시 값을 만들 수는 없으므로 충돌을 피할 순 없다.
