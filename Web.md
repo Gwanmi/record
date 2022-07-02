@@ -61,3 +61,16 @@
 - 해당 경로에서 'cd (설치된 jdk).jdk/Contents/Home'를 들어가 pwd로 경로를 복사
 - 복사한 경로를 'vi ~/.bash_profile'로 열어 'export JAVA_HOME=복사한 경로' 입력 후 저장
 - 'java -version'을 입력하여 버전을 확인
+
+## 2.2 Spring Project 생성
+- https://start.spring.io/ <- 여기에서 생성한다.
+- 프로젝트는 Maven과 Gradle이 있는데 빌드 관리도구로 요즘은 Gradle을 더 많이 쓴다고하니 나도 Gradle로 간다.
+- 스프링 버전 차이점
+  - Snapshot
+    - daily build 버전, 실험 중인 버전으로 새로 개발 중인 기능이 있을 수 있다(인터페이스가 변경 될 수 있음)
+  - M(Milstone)
+    - Snapshot 보다 정리가 잘 되어 있는 버전, 실험 중인 버전으로 새로 개발 중인 기능이 있을 수 있다(인터페이스가 변경 될 수 있음)
+  - RC(Release candidate)
+    - Milstone 본다 더 정리가 잘 되어저 배포된 버전으로 웬만하면 개발된 기능들은 그대로 배포된다.
+  - ga
+    - 최종 release 버전
