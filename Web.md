@@ -63,8 +63,8 @@
 
 ## 2.2 Spring Project 생성
 - https://start.spring.io/ <- 여기에서 생성한다.
-- 프로젝트는 Maven과 Gradle이 있는데 빌드 관리도구로 요즘은 Gradle을 더 많이 쓴다고하니 나도 Gradle로 간다.
-- 스프링 버전 차이점
+- Project: 프로젝트는 Maven과 Gradle이 있는데 빌드 관리도구로 요즘은 Gradle을 더 많이 쓴다고하니 나도 Gradle로 간다.
+- Spring Boot: 2.7.1로 설정. 그리고 스프링 버전 차이점
   - Snapshot
     - daily build 버전, 실험 중인 버전으로 새로 개발 중인 기능이 있을 수 있다(인터페이스가 변경 될 수 있음)
   - M(Milstone)
@@ -73,15 +73,23 @@
     - Milstone 본다 더 정리가 잘 되어저 배포된 버전으로 웬만하면 개발된 기능들은 그대로 배포된다.
   - ga
     - 최종 release 버전
- - Jar, War 차이점
-   - 둘 다 Java의 jar 옵션 (java -jar)을 이용해 생성된 압축(아카이브) 파일로, 애플리케이션을 쉽게 배포하고 동작시킬 수 있도록 관련 파일(리소스, 속성 파일 등)을 패키징 한 것.
-   - JAR (Java Archive)
-     - JAVA 어플리케이션이 동작할 수 있도록 자바 프로젝트를 압축한 파일
-     - Class (JAVA리소스, 속성 파일), 라이브러리 파일을 포함함
-     - JRE(JAVA Runtime Environment)만 있어도 실행 가능함 (java -jar 프로젝트네임.jar)
-   - WAR (Web Application Archive)
-     - Servlet / Jsp 컨테이너에 배치할 수 있는 웹 애플리케이션(Web Application) 압축파일 포맷
-     - 웹 관련 자원을 포함함 (JSP, Servlet, JAR, Class, XML, HTML, Javascript)
-     - 사전 정의된 구조를 사용함 (WEB-INF, META-INF)
-     - 별도의 웹서버(WEB) or 웹 컨테이너(WAS) 필요
-     - 즉, JAR파일의 일종으로 웹 애플리케이션 전체를 패키징 하기 위한 JAR 파일이다.
+- Packaging: Jar로 설정. 그리고 Jar, War 차이점
+  - 둘 다 Java의 jar 옵션 (java -jar)을 이용해 생성된 압축(아카이브) 파일로, 애플리케이션을 쉽게 배포하고 동작시킬 수 있도록 관련 파일(리소스, 속성 파일 등)을 패키징 한 것.
+  - JAR (Java Archive)
+    - JAVA 어플리케이션이 동작할 수 있도록 자바 프로젝트를 압축한 파일
+    - Class (JAVA리소스, 속성 파일), 라이브러리 파일을 포함함
+    - JRE(JAVA Runtime Environment)만 있어도 실행 가능함 (java -jar 프로젝트네임.jar)
+  - WAR (Web Application Archive)
+    - Servlet / Jsp 컨테이너에 배치할 수 있는 웹 애플리케이션(Web Application) 압축파일 포맷
+    - 웹 관련 자원을 포함함 (JSP, Servlet, JAR, Class, XML, HTML, Javascript)
+    - 사전 정의된 구조를 사용함 (WEB-INF, META-INF)
+    - 별도의 웹서버(WEB) or 웹 컨테이너(WAS) 필요
+    - 즉, JAR파일의 일종으로 웹 애플리케이션 전체를 패키징 하기 위한 JAR 파일이다.
+- Java 버전: 17
+- Dependencies
+  - Developer Tools: Spring Boot DevTools, Lombok
+  - DB: H2, MyBatis Framework
+  - Web: Spring Web
+  - Template Engines: Thymeleaf
+
+- 위와 같이 설정이 됐으면 Generate하여 Zip 파일 다운 후 압축해제
