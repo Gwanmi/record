@@ -93,3 +93,4 @@
   - Template Engines: Thymeleaf
 
 - 위와 같이 설정이 됐으면 Generate하여 Zip 파일 다운 후 압축해제
+- Finder로 압축해제 후 적절한 디렉토리에 옮기거나 생성해서 이동
